@@ -1,18 +1,98 @@
-# React + Vite
+# Frontend Quiz App
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This is a simple React quiz app.
 
-Currently, two official plugins are available:
+The user can study or take a quiz in Frontend topics.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Topics
 
-## React Compiler
+- JavaScript
+- React
+- HTML
+- CSS
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Each topic has 10 questions.
 
-Note: This will impact Vite dev & build performances.
+## What the App Does
 
-## Expanding the Oxlint configuration
+- The user enters full name, phone, and email.
+- The user chooses Study Mode or Exam Mode.
+- The user chooses one or more topics.
+- The app shows one question at a time.
+- In Study Mode, the app shows if the answer is correct or wrong.
+- In Study Mode, the app also shows a short explanation.
+- In Exam Mode, the app shows the score at the end.
+- The user can try again or choose different topics.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Project Folders
+
+src/app
+
+Contains the main App component.
+
+src/components
+
+Contains all screen components:
+
+- Header
+- LoginScreen
+- SetupScreen
+- QuestionScreen
+- SummaryScreen
+
+src/data
+
+Contains the questions array.
+
+src/utils
+
+Contains helper functions for filtering and shuffling questions.
+
+## Main Files
+
+src/app/App.jsx
+
+Controls the app screens and the main state.
+
+src/data/questions.js
+
+Contains all quiz questions.
+
+src/utils/questionUtils.js
+
+Contains functions for:
+
+- filtering questions by topic
+- shuffling questions
+- shuffling answers
+- preparing study or exam questions
+
+## React Rules Used
+
+- Components
+- Props
+- useState
+- Controlled forms
+- CSS Modules
+
+## Not Used
+
+This project does not use:
+
+- Backend
+- Router
+- localStorage
+- useEffect
+- External CSS libraries
+
+## How to Run
+
+Open terminal and write:
+
+npm install
+
+npm run dev
+
+## How to Build
+
+npm run build
