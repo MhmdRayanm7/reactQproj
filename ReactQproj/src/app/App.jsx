@@ -1,3 +1,4 @@
+import SummaryScreen from "../components/summary/SummaryScreen";
 import { useState } from "react";
 import Header from "../components/header/Header";
 import LoginScreen from "../components/login/LoginScreen";
@@ -70,7 +71,11 @@ function App() {
         ) : quizSettings === null ? (
           <SetupScreen user={user} onStart={handleStart} />
         ) : currentIndex >= sessionQuestions.length ? (
-          <p>Finished round. Answers saved: {userAnswers.length}</p>
+          <SummaryScreen
+            user={user}
+            mode={quizSettings.mode}
+            userAnswers={userAnswers}
+          />
         ) : (
           <QuestionScreen
             question={sessionQuestions[currentIndex]}
