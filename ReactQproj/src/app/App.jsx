@@ -74,6 +74,7 @@ function App() {
         ) : (
           <QuestionScreen
             question={sessionQuestions[currentIndex]}
+            mode={quizSettings.mode}
             currentIndex={currentIndex}
             totalQuestions={sessionQuestions.length}
             selectedAnswer={selectedAnswer}

@@ -69,3 +69,24 @@
   text-align: center;
   margin: 0;
 }
+
+.correctBox {
+  background: #dcfce7;
+  color: #166534;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.wrongBox {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.correctBox p,
+.wrongBox p {
+  margin: 4px 0;
+}

@@ -2,6 +2,7 @@ import styles from "./question.module.css";
 
 function QuestionScreen({
   question,
+  mode,
   currentIndex,
   totalQuestions,
   selectedAnswer,
@@ -9,6 +10,10 @@ function QuestionScreen({
   onSelectAnswer,
   onNext,
 }) {
+  const isStudyMode = mode === "study";
+  const isAnswerSelected = selectedAnswer !== "";
+  const isCorrect = selectedAnswer === question.correctAnswer;
+
   return (
     <div className={styles.questionBox}>
       <p className={styles.progress}>
@@ -32,8 +37,11 @@ function QuestionScreen({
         ))}
       </div>
 
-      {selectedAnswer !== "" && (
-        <p className={styles.selectedText}>You selected: {selectedAnswer}</p>
+      {isStudyMode && isAnswerSelected && (
+        <div className={isCorrect ? styles.correctBox : styles.wrongBox}>
+          <p>{isCorrect ? "Correct answer!" : "Wrong answer!"}</p>
+          <p>{question.explanation}</p>
+        </div>
       )}
 
       <button className={styles.nextButton} type="button" onClick={onNext}>
