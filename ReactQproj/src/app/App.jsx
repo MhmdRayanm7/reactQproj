@@ -1,9 +1,9 @@
-import SummaryScreen from "../components/summary/SummaryScreen";
 import { useState } from "react";
 import Header from "../components/header/Header";
 import LoginScreen from "../components/login/LoginScreen";
 import SetupScreen from "../components/setup/SetupScreen";
 import QuestionScreen from "../components/question/QuestionScreen";
+import SummaryScreen from "../components/summary/SummaryScreen";
 import { questions } from "../data/questions";
 import { prepareSessionQuestions } from "../utils/questionUtils";
 import styles from "./app.module.css";
@@ -35,30 +35,6 @@ function App() {
     setUserAnswers([]);
     setQuestionError("");
   }
-  
-  function handleRetry() {
-  const preparedQuestions = prepareSessionQuestions(
-    questions,
-    quizSettings.topics,
-    quizSettings.mode
-  );
-
-    setSessionQuestions(preparedQuestions);
-    setCurrentIndex(0);
-    setSelectedAnswer("");
-    setUserAnswers([]);
-    setQuestionError("");
-  }
-
-  function handleChooseAgain() {
-    setQuizSettings(null);
-    setSessionQuestions([]);
-    setCurrentIndex(0);
-    setSelectedAnswer("");
-    setUserAnswers([]);
-    setQuestionError("");
-  }
-  
 
   function handleSelectAnswer(answer) {
     setSelectedAnswer(answer);
@@ -85,14 +61,42 @@ function App() {
     setCurrentIndex(currentIndex + 1);
   }
 
-  return (
+  function handleRetry() {
+      if (quizSettings === null) {
+    return;
+    }
+    const preparedQuestions = prepareSessionQuestions(
+      questions,
+      quizSettings.topics,
+      quizSettings.mode
+    );
+
+    setSessionQuestions(preparedQuestions);
+    setCurrentIndex(0);
+    setSelectedAnswer("");
+    setUserAnswers([]);
+    setQuestionError("");
+  }
+
+  function handleChooseAgain() {
+    setQuizSettings(null);
+    setSessionQuestions([]);
+    setCurrentIndex(0);
+    setSelectedAnswer("");
+    setUserAnswers([]);
+    setQuestionError("");
+  }
+
+  const hasUser = user !== null;
+  const hasSettings = quizSettings !== null;
+    return (
     <div className={styles.app}>
       <div className={styles.card}>
         <Header />
 
-        {user === null ? (
+        {!hasUser ? (
           <LoginScreen onLogin={handleLogin} />
-        ) : quizSettings === null ? (
+        ) : !hasSettings ? (
           <SetupScreen user={user} onStart={handleStart} />
         ) : currentIndex >= sessionQuestions.length ? (
           <SummaryScreen
@@ -117,6 +121,7 @@ function App() {
       </div>
     </div>
   );
+  
 }
 
 export default App;
