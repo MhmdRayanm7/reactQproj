@@ -35,6 +35,30 @@ function App() {
     setUserAnswers([]);
     setQuestionError("");
   }
+  
+  function handleRetry() {
+  const preparedQuestions = prepareSessionQuestions(
+    questions,
+    quizSettings.topics,
+    quizSettings.mode
+  );
+
+    setSessionQuestions(preparedQuestions);
+    setCurrentIndex(0);
+    setSelectedAnswer("");
+    setUserAnswers([]);
+    setQuestionError("");
+  }
+
+  function handleChooseAgain() {
+    setQuizSettings(null);
+    setSessionQuestions([]);
+    setCurrentIndex(0);
+    setSelectedAnswer("");
+    setUserAnswers([]);
+    setQuestionError("");
+  }
+  
 
   function handleSelectAnswer(answer) {
     setSelectedAnswer(answer);
@@ -75,6 +99,8 @@ function App() {
             user={user}
             mode={quizSettings.mode}
             userAnswers={userAnswers}
+            onRetry={handleRetry}
+            onChooseAgain={handleChooseAgain}
           />
         ) : (
           <QuestionScreen

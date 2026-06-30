@@ -1,6 +1,6 @@
 import styles from "./summary.module.css";
 
-function SummaryScreen({ user, mode, userAnswers }) {
+function SummaryScreen({ user, mode, userAnswers, onRetry, onChooseAgain }) {
   const correctCount = userAnswers.filter(
     (answer) => answer.selectedAnswer === answer.correctAnswer
   ).length;
@@ -23,6 +23,16 @@ function SummaryScreen({ user, mode, userAnswers }) {
       <div className={styles.results}>
         <p>Correct answers: {correctCount}</p>
         <p>Wrong answers: {wrongCount}</p>
+      </div>
+
+      <div className={styles.actions}>
+        <button type="button" onClick={onRetry}>
+          Try Again
+        </button>
+
+        <button type="button" onClick={onChooseAgain}>
+          Choose Again
+        </button>
       </div>
     </div>
   );
