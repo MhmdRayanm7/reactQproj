@@ -2,6 +2,8 @@ import { useState } from "react";
 import Header from "../components/header/Header";
 import LoginScreen from "../components/login/LoginScreen";
 import SetupScreen from "../components/setup/SetupScreen";
+import { questions } from "../data/questions";
+import { getQuestionsByTopics } from "../utils/questionUtils";
 import styles from "./app.module.css";
 
 function App() {
@@ -16,6 +18,11 @@ function App() {
     setQuizSettings(settings);
   }
 
+  const selectedQuestions =
+    quizSettings === null
+      ? []
+      : getQuestionsByTopics(questions, quizSettings.topics);
+
   return (
     <div className={styles.app}>
       <div className={styles.card}>
@@ -26,9 +33,13 @@ function App() {
         ) : quizSettings === null ? (
           <SetupScreen user={user} onStart={handleStart} />
         ) : (
-          <p>
-            Started {quizSettings.mode} with: {quizSettings.topics.join(", ")}
-          </p>
+          <div>
+            <p>
+              Started {quizSettings.mode} with: {quizSettings.topics.join(", ")}
+            </p>
+
+            <p>Questions found: {selectedQuestions.length}</p>
+          </div>
         )}
       </div>
     </div>
