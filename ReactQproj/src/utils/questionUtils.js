@@ -8,20 +8,32 @@ export function getQuestionsByTopics(allQuestions, selectedTopics) {
 }
 
 /**
- * Returns a new shuffled copy of the questions array.
+ * Returns a new shuffled copy of an array.
  */
-export function shuffleQuestions(questions) {
-  const shuffledQuestions = [...questions];
+export function shuffleArray(array) {
+  const shuffledArray = [...array];
 
-  for (let i = shuffledQuestions.length - 1; i > 0; i--) {
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
     const randomIndex = Math.floor(Math.random() * (i + 1));
 
-    const temp = shuffledQuestions[i];
-    shuffledQuestions[i] = shuffledQuestions[randomIndex];
-    shuffledQuestions[randomIndex] = temp;
+    const temp = shuffledArray[i];
+    shuffledArray[i] = shuffledArray[randomIndex];
+    shuffledArray[randomIndex] = temp;
   }
 
-  return shuffledQuestions;
+  return shuffledArray;
+}
+
+/**
+ * Returns questions with shuffled answers.
+ */
+export function shuffleAnswersInQuestions(questions) {
+  return questions.map((question) => {
+    return {
+      ...question,
+      answers: shuffleArray(question.answers),
+    };
+  });
 }
 
 /**
@@ -29,11 +41,12 @@ export function shuffleQuestions(questions) {
  */
 export function prepareSessionQuestions(allQuestions, selectedTopics, mode) {
   const filteredQuestions = getQuestionsByTopics(allQuestions, selectedTopics);
-  const shuffledQuestions = shuffleQuestions(filteredQuestions);
+  const shuffledQuestions = shuffleArray(filteredQuestions);
+  const questionsWithShuffledAnswers = shuffleAnswersInQuestions(shuffledQuestions);
 
   if (mode === "exam") {
-    return shuffledQuestions.slice(0, 5);
+    return questionsWithShuffledAnswers.slice(0, 5);
   }
 
-  return shuffledQuestions;
+  return questionsWithShuffledAnswers;
 }
