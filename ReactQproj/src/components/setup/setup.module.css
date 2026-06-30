@@ -1,0 +1,55 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+}
+
+.form h2 {
+  margin: 0;
+  text-align: center;
+  color: #1f2937;
+}
+
+.form p {
+  margin: 0;
+  text-align: center;
+  color: #6b7280;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section h3 {
+  margin: 0;
+  color: #374151;
+}
+
+.section label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #374151;
+}
+
+.form button {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 0;
+}
