@@ -51,7 +51,7 @@ function App() {
     setQuestionError("");
   }
 
-  function handleNextQuestion() {
+ function handleNextQuestion() {
     if (selectedAnswer === "") {
       setQuestionError("Please choose an answer first");
       return;
@@ -65,11 +65,40 @@ function App() {
       correctAnswer: currentQuestion.correctAnswer,
     };
 
-    setUserAnswers([...userAnswers, answerData]);
-    setSelectedAnswer("");
+    const updatedAnswers = [...userAnswers];
+    updatedAnswers[currentIndex] = answerData;
+
+    const nextIndex = currentIndex + 1;
+
+    setUserAnswers(updatedAnswers);
     setQuestionError("");
-    setCurrentIndex(currentIndex + 1);
+    setCurrentIndex(nextIndex);
+
+    if (nextIndex < sessionQuestions.length && updatedAnswers[nextIndex]) {
+      setSelectedAnswer(updatedAnswers[nextIndex].selectedAnswer);
+    } else {
+      setSelectedAnswer("");
+    }
   }
+
+  function handlePreviousQuestion() {
+    if (currentIndex === 0) {
+      return;
+    }
+
+    const previousIndex = currentIndex - 1;
+    const previousAnswer = userAnswers[previousIndex];
+
+    setCurrentIndex(previousIndex);
+    setQuestionError("");
+
+    if (previousAnswer) {
+      setSelectedAnswer(previousAnswer.selectedAnswer);
+    } else {
+      setSelectedAnswer("");
+    }
+  }
+
 
   function handleRetry() {
       if (quizSettings === null) {
@@ -128,8 +157,10 @@ function App() {
             totalQuestions={sessionQuestions.length}
             selectedAnswer={selectedAnswer}
             error={questionError}
+            canGoBack={currentIndex > 0}
             onSelectAnswer={handleSelectAnswer}
             onNext={handleNextQuestion}
+            onPrevious={handlePreviousQuestion}
           />
         )}
       </div>

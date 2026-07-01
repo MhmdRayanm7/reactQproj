@@ -7,8 +7,10 @@ function QuestionScreen({
   totalQuestions,
   selectedAnswer,
   error,
+  canGoBack,
   onSelectAnswer,
   onNext,
+  onPrevious,
 }) {
   const isStudyMode = mode === "study";
   const isAnswerSelected = selectedAnswer !== "";
@@ -44,9 +46,21 @@ function QuestionScreen({
         </div>
       )}
 
-      <button className={styles.nextButton} type="button" onClick={onNext}>
-        Next
-      </button>
+      <div className={styles.actions}>
+        {mode === "exam" && canGoBack && (
+          <button
+            className={styles.backButton}
+            type="button"
+            onClick={onPrevious}
+          >
+            Back
+          </button>
+        )}
+
+        <button className={styles.nextButton} type="button" onClick={onNext}>
+          Next
+        </button>
+      </div>
     </div>
   );
 }
