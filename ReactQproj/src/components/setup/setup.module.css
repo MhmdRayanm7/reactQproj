@@ -97,3 +97,22 @@
   margin: 0;
   font-weight: 800;
 }
+
+.backButton {
+  padding: 12px;
+  border: 1px solid rgba(94, 234, 212, 0.35);
+  border-radius: 14px;
+  background: rgba(2, 44, 34, 0.35);
+  color: #d1fae5;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.backButton:hover {
+  transform: translateY(-3px);
+  border-color: #5eead4;
+  box-shadow: 0 14px 30px rgba(20, 184, 166, 0.14);
+  color: #5eead4;
+}

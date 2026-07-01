@@ -3,7 +3,7 @@ import styles from "./setup.module.css";
 
 const topics = ["JavaScript", "React", "HTML", "CSS"];
 
-function SetupScreen({ user, onStart }) {
+function SetupScreen({ user, onStart,  onBackToLogin  }) {
   const [mode, setMode] = useState("study");
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [error, setError] = useState("");
@@ -36,6 +36,13 @@ function SetupScreen({ user, onStart }) {
     <form className={styles.form} onSubmit={handleSubmit}>
       <h2>Hello, {user.fullName}</h2>
       <p>Choose how you want to practice.</p>
+      <button
+          className={styles.backButton}
+          type="button"
+          onClick={onBackToLogin}
+        >
+          Back to Login
+        </button>
 
       {error !== "" && <p className={styles.error}>{error}</p>}
 

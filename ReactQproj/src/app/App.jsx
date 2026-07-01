@@ -21,6 +21,16 @@ function App() {
     setUser(userData);
   }
 
+  function handleBackToLogin() {
+    setUser(null);
+    setQuizSettings(null);
+    setSessionQuestions([]);
+    setCurrentIndex(0);
+    setSelectedAnswer("");
+    setUserAnswers([]);
+    setQuestionError("");
+  }
+
   function handleStart(settings) {
     const preparedQuestions = prepareSessionQuestions(
       questions,
@@ -97,7 +107,11 @@ function App() {
         {!hasUser ? (
           <LoginScreen onLogin={handleLogin} />
         ) : !hasSettings ? (
-          <SetupScreen user={user} onStart={handleStart} />
+          <SetupScreen
+            user={user}
+            onStart={handleStart}
+            onBackToLogin={handleBackToLogin}
+          />
         ) : currentIndex >= sessionQuestions.length ? (
           <SummaryScreen
             user={user}
